@@ -2,7 +2,7 @@ clc;
 clear all;
 
 % Importa os dados
-load("tripartite.txt");
+load('tripartite.txt');
 
 % Define início e término de cada matriz
 linha_inicial = 1;
