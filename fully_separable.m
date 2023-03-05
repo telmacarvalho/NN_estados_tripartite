@@ -4,21 +4,16 @@ clear all;
 load('estados_tripartite.mat');
 load('a_peso.mat');
 
-% Aplicaa critério de totalmente separável (obs.4 do artigo)
+% Aplicaa critério de totalmente separável (obs.4 do artigo - eq.5)
 for n = 1:1001
     % Cálculo do lado esquerdo da desigualdade
-    element_l2_c3 = sqrt((estados_tripartite{n}(2,3))^2);
-    element_l2_c5 = sqrt((estados_tripartite{n}(2,5))^2);
-    element_l3_c5 = sqrt((estados_tripartite{n}(3,5))^2);
-    somatoria_1 = element_l2_c3 + element_l2_c5 + element_l3_c5;
+    element_l1_8 = sqrt((estados_tripartite{n}(1,8))^2);
     % Cálculo do lado direito da desigualdade
-    termo_1 = sqrt((estados_tripartite{n}(1,1) * estados_tripartite{n}(4,4)));
-    termo_2 = sqrt((estados_tripartite{n}(1,1) * estados_tripartite{n}(6,6)));
-    termo_3 = sqrt((estados_tripartite{n}(1,1) * estados_tripartite{n}(7,7)));
-    somatoria_2 = termo_1 + termo_2 + termo_3;
-    
+    multiplicacao = (estados_tripartite{n}(2,2) * estados_tripartite{n}(3,3)...
+        * estados_tripartite{n}(4,4) * estados_tripartite{n}(5,5) ...
+        * estados_tripartite{n}(6,6) * estados_tripartite{n}(7,7))^(1/6);
     % Define se é separável: emaranhado = 0 e totalmente separável = 1
-    if (somatoria_1 <= somatoria_2)
+    if (element_l1_8 <= multiplicacao)
         resultado(n,1) = 1;
         rotulos_fully{n,1} = 'totalmente separável';
     else
