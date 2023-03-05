@@ -64,7 +64,7 @@ yticklabels({ })
 legend({'Totalmente separável','Emaranhado'},'Location','southwest', 'Color','none')
 title('Classificação de separabilidade total de estados tripartite')
 % Fixando um sombreado para P>1/3
-cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
-patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0.95 1.95 1.95 -0.95 -0.95]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Área de emaranhamento')
+%cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
+%patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0.95 1.95 1.95 -0.95 -0.95]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Área de emaranhamento')
 axis([-0.02 1.02 -1 2])
-set(gca,'children',flipud(get(gca,'children')))
+%set(gca,'children',flipud(get(gca,'children')))
