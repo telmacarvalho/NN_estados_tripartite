@@ -24,5 +24,5 @@ for n = 1:1001
     parametro = a;
 end
 
-save('estados_tripartite.csv', 'estados_tripartite');
-save('a_peso.csv', 'a_peso');
+save('estados_tripartite.mat', 'estados_tripartite');
+save('a_peso.mat', 'a_peso');
