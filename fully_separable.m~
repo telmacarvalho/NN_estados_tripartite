@@ -1,0 +1,19 @@
+clc;
+clear all;
+
+load('estados_tripartite.mat');
+load('a_peso.mat');
+
+% Aplicaa critério de totalmente separável (obs.4 do artigo)
+for n = 1:1001
+    % Cálculo do lado esquerdo da desigualdade
+    element_l2_c3 = sqrt((estados_tripartite{n}(2,3))^2);
+    element_l2_c5 = sqrt((estados_tripartite{n}(2,5))^2);
+    element_l3_c5 = sqrt((estados_tripartite{n}(3,5))^2);
+    somatoria1 = element_l2_c3 + element_l2_c5 + element_l3_c5;
+    % Cálculo do lado direito da desigualdade
+    termo_1 = sqrt((estados_tripartite{n}(1,1) + (estados_tripartite{n}(4,4))^2));
+    termo_2 = sqrt((estados_tripartite{n}(1,1) + (estados_tripartite{n}(6,6))^2));
+    termo_3 = sqrt((estados_tripartite{n}(1,1) + (estados_tripartite{n}(7,7))^2));
+    somatoria2 = 
+end
