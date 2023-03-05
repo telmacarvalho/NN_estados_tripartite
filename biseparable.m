@@ -4,20 +4,22 @@ clear all;
 load('estados_tripartite.mat');
 load('a_peso.mat');
 
-% Aplica critério de biseparabilidade
+% Aplica critério de biseparabilidade (obs.1 do artigo)
 for n = 1:1001
+    % Cálculo do lado esquerdo da desigualdade
     element_l1_c8 = sqrt((estados_tripartite{n}(1,8))^2);
-    termo_1 = sqrt((estados_tripartite{n}(2,2) + (estados_tripartite{n}(7,7))^2));
-    termo_2 = sqrt((estados_tripartite{n}(3,3) + (estados_tripartite{n}(6,6))^2));
-    termo_3 = sqrt((estados_tripartite{n}(4,4) + (estados_tripartite{n}(5,5))^2));
+    % Cálculo do lado direito da desigualdade
+    termo_1 = sqrt(estados_tripartite{n}(2,2) * estados_tripartite{n}(7,7));
+    termo_2 = sqrt(estados_tripartite{n}(3,3) * estados_tripartite{n}(6,6));
+    termo_3 = sqrt(estados_tripartite{n}(4,4) * estados_tripartite{n}(5,5));
     somatoria = termo_1 + termo_2 + termo_3;
-    % Defini se é separável: emaranhado = 0 e biseparável = 1
+    % Define se é separável: emaranhado = 0 e biseparável = 1
     if (element_l1_c8 <= somatoria)
         resultado(n,1) = 1;
-        rotulos{n,1} = 'biseparável';
+        rotulos_biseparable{n,1} = 'biseparável';
     else
         resultado(n,1) = 0;
-        rotulos{n,1} = 'emaranhado';
+        rotulos_biseparable{n,1} = 'emaranhado';
     end
     
     % Preparando dados para o gráfico classificatório
@@ -38,9 +40,7 @@ for n = 1:1001
 end
 
 % Exportação dos dados
-rotulos = categorical(rotulos);
-classification_biseparable = dummyvar(rotulos);
-tripartite_classification_biseparable = classification_biseparable( :, 2);
+tripartite_classification_biseparable = rotulos_biseparable( :, 1);
 save('tripartite_classification_biseparable.mat', 'tripartite_classification_biseparable');
 
 % Gráfico classificatório
@@ -59,7 +59,7 @@ yticklabels({ })
 legend({'Biseparável','Emaranhado'},'Location','southwest', 'Color','none')
 title('Classificação de biseparabilidade de estados tripartite')
 % Fixando um sombreado para P>1/3
-cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
-patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0.95 1.95 1.95 -0.95 -0.95]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Área de emaranhamento')
+%cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
+%patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0.95 1.95 1.95 -0.95 -0.95]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Área de emaranhamento')
 axis([-0.02 1.02 -1 2])
-set(gca,'children',flipud(get(gca,'children')))
+%set(gca,'children',flipud(get(gca,'children')))
