@@ -1,37 +1,37 @@
 clc;
 clear all;
 
-load('estados_tripartite.mat');
-load('a_peso.mat');
+load('Westados_tripartite.mat');
+load('Wa_peso.mat');
 
 % Aplica critério de biseparabilidade (obs.1 do artigo)
 for n = 1:1001
     % Cálculo do lado esquerdo da desigualdade
-    element_l1_c8 = sqrt((estados_tripartite{n}(1,8))^2);
+    element_l1_c8 = sqrt((Westados_tripartite{n}(1,8))^2);
     % Cálculo do lado direito da desigualdade
-    termo_1 = sqrt(estados_tripartite{n}(2,2) * estados_tripartite{n}(7,7));
-    termo_2 = sqrt(estados_tripartite{n}(3,3) * estados_tripartite{n}(6,6));
-    termo_3 = sqrt(estados_tripartite{n}(4,4) * estados_tripartite{n}(5,5));
+    termo_1 = sqrt(Westados_tripartite{n}(2,2) * Westados_tripartite{n}(7,7));
+    termo_2 = sqrt(Westados_tripartite{n}(3,3) * Westados_tripartite{n}(6,6));
+    termo_3 = sqrt(Westados_tripartite{n}(4,4) * Westados_tripartite{n}(5,5));
     somatoria = termo_1 + termo_2 + termo_3;
     % Define se é separável: emaranhado = 0 e biseparável = 1
     if (element_l1_c8 <= somatoria)
-        resultado(n,1) = 1;
-        rotulos_biseparable{n,1} = 'biseparável';
+        Wresultado(n,1) = 1;
+        Wrotulos_biseparable{n,1} = 'biseparável';
     else
-        resultado(n,1) = 0;
-        rotulos_biseparable{n,1} = 'emaranhado';
+        Wresultado(n,1) = 0;
+        Wrotulos_biseparable{n,1} = 'emaranhado';
     end
     
     % Preparando dados para o gráfico classificatório
-    if (resultado(n) == 1)
-        x(n) = a_peso(n);
+    if (Wresultado(n) == 1)
+        x(n) = Wa_peso(n);
         y(n) = 1;
     else
         x(n) = -1;
         y(n) = -1;
     end
-    if (resultado(n) == 0)
-        z(n) = a_peso(n);
+    if (Wresultado(n) == 0)
+        z(n) = Wa_peso(n);
         k(n) = 0;
     else
         z(n) = -1;
@@ -40,8 +40,8 @@ for n = 1:1001
 end
 
 % Exportação dos dados
-tripartite_classification_biseparable = rotulos_biseparable( :, 1);
-save('tripartite_classification_biseparable.mat', 'tripartite_classification_biseparable');
+Wtripartite_classification_biseparable = Wrotulos_biseparable( :, 1);
+save('Wtripartite_classification_biseparable.mat', 'Wtripartite_classification_biseparable');
 
 % Gráfico classificatório
 x = x(x>=0);
@@ -57,7 +57,7 @@ xticks([0:0.1:1])
 yticks([0 1])
 yticklabels({ })
 legend({'Biseparável','Emaranhado'},'Location','southwest', 'Color','none')
-title('Classificação de biseparabilidade de estados tripartite')
+title('Classificação de biseparabilidade de estados Wtripartite')
 % Fixando um sombreado para P>1/3
 %cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
 %patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0.95 1.95 1.95 -0.95 -0.95]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Área de emaranhamento')
