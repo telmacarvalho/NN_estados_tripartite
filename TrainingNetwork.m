@@ -4,11 +4,17 @@ clc;
 % Introdução de dados para a Rede Neural
 load('Wa_peso.mat');
 load('tripartite.mat');
-load('Wtripartite_classification_biseparable.mat');
+dados_parciais = 'f_separable';
+if (dados_parciais == 'biseparable')
+    load('Wtripartite_classification_biseparable.mat');
+    W_PPT = Wtripartite_classification_biseparable;
+elseif (dados_parciais == 'f_separable')
+    load('Wtripartite_classification_fully_separable');
+    W_PPT = Wtripartite_classification_fully_separable;
+end
 
 % Ajuste para entrada de dados tripartite
 input = tripartite;
-W_PPT = Wtripartite_classification_biseparable;
 W_Peso = Wa_peso;
 
 %  Definindo a porcentagem de dados usados em cada etapa
@@ -34,7 +40,11 @@ for m = 1: size(t,2)
     T1 = t(1,m);
     input_Data_test(m, :) = input(T1, :);  
     correct_Output_test(m, :) = W_PPT(T1, :);
-    peso_test_tripartite_biseparable(m, :) = W_Peso(T1, :);
+    if (dados_parciais == 'biseparable')
+        peso_test_tripartite_biseparable(m, :) = W_Peso(T1, :);
+    elseif (dados_parciais == 'f_separable')
+        peso_test_tripartite_fully_separable(m, :) = W_Peso(T1, :);
+    end
     T2 = ismember(T1,N);
     assert(T2 == 0)
 end
