@@ -12,26 +12,26 @@ for n = 1:1001
     multiplicacao = (Westados_tripartite{n}(2,2) * Westados_tripartite{n}(3,3)...
         * Westados_tripartite{n}(4,4) * Westados_tripartite{n}(5,5) ...
         * Westados_tripartite{n}(6,6) * Westados_tripartite{n}(7,7))^(1/6);
-    % Define se é separável: emaranhado = 0 e totalmente separável = 1
+    % Define se é separável: emaranhado = 1 e totalmente separável = 0
     if (element_l1_8 <= multiplicacao)
-        Wresultado(n,1) = 1;
+        Wresultado(n,1) = 0;
         Wrotulos_fully{n,1} = 'totalmente separável';
     else
-        Wresultado(n,1) = 0;
+        Wresultado(n,1) = 1;
         Wrotulos_fully{n,1} = 'emaranhado';
     end
     
     % Preparando dados para o gráfico classificatório
-    if (Wresultado(n) == 1)
+    if (Wresultado(n) == 0)
         x(n) = Wa_peso(n);
-        y(n) = 1;
+        y(n) = 0;
     else
         x(n) = -1;
         y(n) = -1;
     end
-    if (Wresultado(n) == 0)
+    if (Wresultado(n) == 1)
         z(n) = Wa_peso(n);
-        k(n) = 0;
+        k(n) = 1;
     else
         z(n) = -1;
         k(n) = -1;
@@ -40,7 +40,7 @@ end
 
 
 % Exportação dos dados
-Wtripartite_classification_fully_separable = Wrotulos_fully( :, 1);
+Wtripartite_classification_fully_separable = Wresultado;
 save('Wtripartite_classification_fully_separable.mat', 'Wtripartite_classification_fully_separable');
 
 % Gráfico classificatório
