@@ -1,0 +1,2 @@
+% Porcentagens atualizadas dos gráficos
+
