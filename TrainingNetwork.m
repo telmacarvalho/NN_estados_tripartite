@@ -34,7 +34,7 @@ for m = 1: size(t,2)
     T1 = t(1,m);
     input_Data_test(m, :) = input(T1, :);  
     correct_Output_test(m, :) = W_PPT(T1, :);
-    peso_test_tripartite(m, :) = W_Peso(T1, :);
+    peso_test_tripartite_biseparable(m, :) = W_Peso(T1, :);
     T2 = ismember(T1,N);
     assert(T2 == 0)
 end
