@@ -2,36 +2,14 @@ clear all;
 clc;
 
 % Introdução de dados para a Rede Neural
-error_angle = 'S';
-dados_parciais = 'Sz___inteiro';
-if (error_angle == 'N')
-    load('W_parcial_SzSy.mat');
-    load('W_parcial_SzSx.mat');
-    load('W_parcial_SzSxParcial.mat');
-    if (dados_parciais == 'SzSy_inteiro')
-        input = W_parcial_SzSy;
-    elseif (dados_parciais == 'SzSx_inteiro')
-        input = W_parcial_SzSx;
-    elseif (dados_parciais == 'SzSx_parcial')
-        input = W_parcial_SzSxParcial;
-    end
-elseif (error_angle == 'S')
-    load('W_parcial_SzSy_erro.mat');
-    load('W_parcial_SzSx_erro.mat');
-    load('W_parcial_SzSxParcial_erro.mat');
-    load('W_parcial_SzOnly_erro')
-    if (dados_parciais == 'SzSy_inteiro')
-        input = W_parcial_SzSy_erro;
-    elseif (dados_parciais == 'SzSx_inteiro')
-        input = W_parcial_SzSx_erro;
-    elseif (dados_parciais == 'SzSx_parcial')
-        input = W_parcial_SzSxParcial_erro;
-    elseif (dados_parciais == 'Sz___inteiro')
-        input = W_parcial_SzOnly_erro;
-    end
-end
-load('W_PPT.mat');
-load('W_Peso.mat');
+load('Wa_peso.mat');
+load('tripartite.mat');
+load('Wtripartite_classification_biseparable.mat');
+
+% Ajuste para entrada de dados tripartite
+input = tripartite;
+W_PPT = Wtripartite_classification_biseparable;
+W_Peso = Wa_peso;
 
 %  Definindo a porcentagem de dados usados em cada etapa
 total = 1001;
@@ -56,31 +34,13 @@ for m = 1: size(t,2)
     T1 = t(1,m);
     input_Data_test(m, :) = input(T1, :);  
     correct_Output_test(m, :) = W_PPT(T1, :);
-    if (error_angle == 'N')
-        if (dados_parciais == 'SzSy_inteiro')
-             peso_test_SzSy(m, :) = W_Peso(T1, :);
-        elseif (dados_parciais == 'SzSx_inteiro')
-             peso_test_SzSx(m, :) = W_Peso(T1, :);
-        elseif (dados_parciais == 'SzSx_parcial')
-             peso_test_SzSxParcial(m, :) = W_Peso(T1, :);
-        end
-    elseif (error_angle == 'S')
-        if (dados_parciais == 'SzSy_inteiro')
-             peso_test_SzSy_erro(m, :) = W_Peso(T1, :);
-        elseif (dados_parciais == 'SzSx_inteiro')
-             peso_test_SzSx_erro(m, :) = W_Peso(T1, :);
-        elseif (dados_parciais == 'SzSx_parcial')
-             peso_test_SzSxParcial_erro(m, :) = W_Peso(T1, :);
-        elseif (dados_parciais == 'Sz___inteiro')
-             peso_test_SzOnly_erro(m, :) = W_Peso(T1, :);
-        end
-    end
+    peso_test_tripartite(m, :) = W_Peso(T1, :);
     T2 = ismember(T1,N);
     assert(T2 == 0)
 end
 
 % Criando os pesos iniciais de maneira aleatória
-w1 = 2*rand(10, 16)-1;
+w1 = 2*rand(10, 64)-1;
 w2 = 2*rand(1, 10)-1;
 
 for epoch = 1:10000
