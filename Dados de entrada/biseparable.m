@@ -40,10 +40,7 @@ for n = 1:1001
 end
 
 % Exportação dos dados
-%Wtripartite_classification_biseparable = Wrotulos_biseparable( :, 1);
-Wrotulos_biseparable = categorical(Wrotulos_biseparable);
-classification_biseparable = dummyvar(Wrotulos_biseparable);
-Wtripartite_classification_biseparable = classification_biseparable(:, 2);
+Wtripartite_classification_biseparable = Wresultado;
 save('Wtripartite_classification_biseparable.mat', 'Wtripartite_classification_biseparable');
 
 % Gráfico classificatório
