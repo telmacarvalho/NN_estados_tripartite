@@ -4,7 +4,7 @@ clc;
 % Introdução de dados para a Rede Neural
 load('Wa_peso.mat');
 load('tripartite.mat');
-dados_parciais = 'f_separable';
+dados_parciais = 'biseparable';
 if (dados_parciais == 'biseparable')
     load('Wtripartite_classification_biseparable.mat');
     W_PPT = Wtripartite_classification_biseparable;

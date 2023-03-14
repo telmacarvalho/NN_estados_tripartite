@@ -3,7 +3,7 @@ clc,
 
 load ('NeuralNetwork.mat');
 % Definindo os estados que serão testados com dados parciais
-dados_parciais = 'f_separable';
+dados_parciais = 'biseparable';
 percent = 0;
 for k = 1:size(input_Data_test, 1)
     % Conversão dos dados de cada estado em uma matriz com uma única coluna e 16 linhas 
@@ -37,7 +37,7 @@ if (dados_parciais == 'biseparable')
     save('result_tripartite_biseparable.mat', 'result_tripartite_biseparable');
     save('peso_test_tripartite_biseparable.mat', 'peso_test_tripartite_biseparable');
     % Comparação do resultado com as respostas corretas
-    check = isequal(result_tripartite_fully_separable, correct_Output_test);
+    check = isequal(result_tripartite_biseparable, correct_Output_test);
         if (check == 1)
             disp('A rede neural acertou todas as classificações com classificação de biseparabilidade.');
         else
