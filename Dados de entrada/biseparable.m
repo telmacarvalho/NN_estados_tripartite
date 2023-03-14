@@ -13,26 +13,26 @@ for n = 1:1001
     termo_2 = sqrt(Westados_tripartite{n}(3,3) * Westados_tripartite{n}(6,6));
     termo_3 = sqrt(Westados_tripartite{n}(4,4) * Westados_tripartite{n}(5,5));
     somatoria = termo_1 + termo_2 + termo_3;
-    % Define se é separável: emaranhado = 1 e biseparável = 0
+    % Define se é separável: emaranhado = 0 e biseparável = 1
     if (element_l1_c8 <= somatoria)
-        Wresultado(n,1) = 0;
+        Wresultado(n,1) = 1;
         Wrotulos_biseparable{n,1} = 'biseparável';
     else
-        Wresultado(n,1) = 1;
+        Wresultado(n,1) = 0;
         Wrotulos_biseparable{n,1} = 'emaranhado';
     end
     
     % Preparando dados para o gráfico classificatório
     if (Wresultado(n) == 0)
         x(n) = Wa_peso(n);
-        y(n) = 0;
+        y(n) = 1;
     else
         x(n) = -1;
         y(n) = -1;
     end
     if (Wresultado(n) == 1)
         z(n) = Wa_peso(n);
-        k(n) = 1;
+        k(n) = 0;
     else
         z(n) = -1;
         k(n) = -1;
@@ -49,7 +49,7 @@ y = y(y>=0);
 z = z(z>=0);
 k = k(k>=0);
 figure
-plot(x, y, 'b.', z, k, 'r.', 'MarkerSize', 20)
+plot(x, y, 'r.', z, k, 'b.', 'MarkerSize', 20)
 set(gca,'FontSize',18)
 set(gca, 'FontName', 'Times New Roman'); 
 %set(gca,'Color','none')
