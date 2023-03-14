@@ -85,17 +85,24 @@ y4 = yline(0.59,'','{\itb)}');
 y4.LabelHorizontalAlignment = 'left';
 set(y4,'FontSize',50, 'FontName', 'Times New Roman')
 
-% Fixando um sombreado para P>1/3
+% Fixando um sombreado para a > 0,4280 (biseparable)
 cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
-patch([(1/3) (1/3) 1.01 1.01 (1/3)]', [-0 1.5 1.5 -0 -0]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Entanglement area')
+patch([(0.4280) (0.428) 1.01 1.01 (0.28)]', [0.75 1.5 1.5 0.75 0.75]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Entanglement area')
+% Fixando um sombreado para a > 0,2000 (fully separable)
+patch([(0.200) (0.200) 1.01 1.01 (0.200)]', [0 0.75 0.75 0 0]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Entanglement area')
 axis([-0.02 1.02 -0.02 1.52])
 set(gca,'children',flipud(get(gca,'children')))
 
+% cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
+% patch([(0.280) (0.428) 1.01 1.01 (0.428)]', [-0 1.5 1.5 -0 -0]', cm(2,:), 'EdgeColor','none', 'DisplayName', 'Entanglement area')
+% axis([-0.02 1.02 -0.02 1.52])
+% set(gca,'children',flipud(get(gca,'children')))
+
 % Legenda dupla
-leg1 = legend(D3,{'Separable', 'Non-separable'},'Location','northwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
+leg1 = legend(D3,{'Biseparable', 'Non-separable'},'Location','northwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
 set(leg1, 'FontSize', 50);
 ah1=axes('position',get(gca,'position'),'visible','off');
-leg2 = legend(ah1, D2,{'Separable', 'Non-separable'},'Location','southwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
+leg2 = legend(ah1, D2,{'Fully Separable', 'Non-separable'},'Location','southwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
 ah2=axes('position',get(gca,'position'),'visible','off');
 set(leg2, 'FontSize', 50,'FontName', 'Times New Roman');
 
