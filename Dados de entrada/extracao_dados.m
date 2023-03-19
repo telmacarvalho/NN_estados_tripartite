@@ -2,7 +2,7 @@ clc;
 clear all;
 
 % Importa os dados
-load('Wtripartite.txt');
+load('Sigmaz.txt');
 
 % Define início e término de cada matriz
 linha_inicial = 1;
@@ -13,7 +13,7 @@ parametro = -0.001;
 
 % Armazena todas as matrizes dentro de células
 for n = 1:1001
-    estados = Wtripartite(linha_inicial:linha_final,1:8);
+    estados = Sigmaz(linha_inicial:linha_final,1:8);
     % Armazena matrizes no formato 8 x 8 dentro de uma lista
     tripartite1 = reshape(estados, 8, 8);
     estados_tripartite{n,1} = tripartite1;
