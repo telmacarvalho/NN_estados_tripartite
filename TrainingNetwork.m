@@ -2,7 +2,7 @@ clear all;
 clc;
 
 % Introdução de dados para a Rede Neural
-load('Wa_peso.mat');
+load('a_peso.mat');
 load('tripartite.mat');
 dados_parciais = 'biseparable';
 if (dados_parciais == 'biseparable')
@@ -15,7 +15,7 @@ end
 
 % Ajuste para entrada de dados tripartite
 input = tripartite;
-W_Peso = Wa_peso;
+W_Peso = a_peso;
 
 %  Definindo a porcentagem de dados usados em cada etapa
 total = 1001;
