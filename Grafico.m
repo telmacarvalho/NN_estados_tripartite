@@ -71,19 +71,22 @@ D2 = plot(c, d, 'c.', a, b, 'b.', 'MarkerSize', 45);
 hold on
 D3 = plot( u, v, 'c.', q, r, 'b.', 'MarkerSize', 45);
 hold off
-set(gca,'FontSize',50)
+set(gca,'FontSize',40)
 set(gca, 'FontName', 'Times New Roman'); 
 xticks([0:0.1:1])
+xlabel('\ita')
 yticklabels({})
 y1 = yline(0.75,'.',' ','LineWidth', 1);
 % Classificação de biseparabilidade
-y2 = yline(1.34,'','{\ita)}');
+y2 = yline(1.38,'','{\ita)}');
 y2.LabelHorizontalAlignment = 'left';
-set(y2,'FontSize',50, 'FontName', 'Times New Roman   ')
+y2.LineStyle = 'none';
+set(y2,'FontSize',40, 'FontName', 'Times New Roman   ')
 % Classificação de separabilidade total
-y4 = yline(0.59,'','{\itb)}');
+y4 = yline(0.63,'','{\itb)}');
 y4.LabelHorizontalAlignment = 'left';
-set(y4,'FontSize',50, 'FontName', 'Times New Roman')
+y4.LineStyle = 'none';
+set(y4,'FontSize',40, 'FontName', 'Times New Roman')
 
 % Fixando um sombreado para a > 0,4280 (biseparable)
 cm = [0 0 0 ;  0.9 0.9 0.9;  1 1 1];
@@ -100,9 +103,9 @@ set(gca,'children',flipud(get(gca,'children')))
 
 % Legenda dupla
 leg1 = legend(D3,{'Biseparable', 'Non-separable'},'Location','northwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
-set(leg1, 'FontSize', 50);
+set(leg1, 'FontSize', 40);
 ah1=axes('position',get(gca,'position'),'visible','off');
 leg2 = legend(ah1, D2,{'Fully Separable', 'Non-separable'},'Location','southwest','Orientation','horizontal', 'Color','none', 'EdgeColor','none');
 ah2=axes('position',get(gca,'position'),'visible','off');
-set(leg2, 'FontSize', 50,'FontName', 'Times New Roman');
+set(leg2, 'FontSize', 40,'FontName', 'Times New Roman');
 
