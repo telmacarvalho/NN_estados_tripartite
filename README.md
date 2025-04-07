@@ -1,4 +1,4 @@
-# Artigo Científico – Non-Separability in Mixed Optical Modes
+# Artigo Científico – Non-separability classification of degrees of freedom of light assisted by machine learning
 
 Este repositório contém a base de código e materiais relacionados ao artigo publicado na revista Optics Communications, resultado da extensão e reformulação do trabalho desenvolvido no meu mestrado.
 
